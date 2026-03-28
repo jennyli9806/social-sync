@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { friends as allFriends } from "@/lib/mockData";
 import FriendCard from "@/components/FriendCard";
-import ScheduleGrid from "@/components/ScheduleGrid";
+import ScheduleGrid, { SlotSelection } from "@/components/ScheduleGrid";
+import { format } from "date-fns";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
