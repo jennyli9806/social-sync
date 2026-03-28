@@ -3,8 +3,16 @@ import { format, addDays, startOfWeek } from "date-fns";
 
 const hours = Array.from({ length: 14 }, (_, i) => i + 7); // 7AM-8PM
 
+export interface SlotSelection {
+  day: number;
+  hour: number;
+  date: Date;
+}
+
 interface ScheduleGridProps {
   friends: Friend[];
+  selectedSlot?: SlotSelection | null;
+  onSlotClick?: (slot: SlotSelection) => void;
 }
 
 export default function ScheduleGrid({ friends }: ScheduleGridProps) {
