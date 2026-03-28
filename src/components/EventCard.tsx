@@ -1,6 +1,7 @@
 import { SocialEvent, friends as allFriends } from "@/lib/mockData";
-import { MapPin, Clock } from "lucide-react";
+import { MapPin, Clock, CalendarDays } from "lucide-react";
 import { motion } from "framer-motion";
+import { format, parseISO } from "date-fns";
 
 const colorMap = {
   coral: "bg-coral-light border-coral/20",
