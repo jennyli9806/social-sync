@@ -1,4 +1,5 @@
-import { Friend, dayNames } from "@/lib/mockData";
+import { Friend } from "@/lib/mockData";
+import { format, addDays, startOfWeek } from "date-fns";
 
 const hours = Array.from({ length: 14 }, (_, i) => i + 7); // 7AM-8PM
 
@@ -25,11 +26,15 @@ export default function ScheduleGrid({ friends }: ScheduleGridProps) {
         {/* Header */}
         <div className="grid grid-cols-8 gap-1 mb-1">
           <div className="text-xs text-muted-foreground font-medium p-2" />
-          {dayNames.map((d) => (
-            <div key={d} className="text-xs font-semibold text-center p-2 text-foreground">
-              {d}
-            </div>
-          ))}
+          {Array.from({ length: 7 }, (_, i) => {
+            const date = addDays(startOfWeek(new Date()), i);
+            return (
+              <div key={i} className="text-xs font-semibold text-center p-2 text-foreground">
+                <div>{format(date, "EEE")}</div>
+                <div className="text-[10px] text-muted-foreground font-normal">{format(date, "MMM d")}</div>
+              </div>
+            );
+          })}
         </div>
 
         {/* Grid */}
