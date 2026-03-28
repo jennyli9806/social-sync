@@ -3,11 +3,19 @@ import { format, addDays, startOfWeek } from "date-fns";
 
 const hours = Array.from({ length: 14 }, (_, i) => i + 7); // 7AM-8PM
 
-interface ScheduleGridProps {
-  friends: Friend[];
+export interface SlotSelection {
+  day: number;
+  hour: number;
+  date: Date;
 }
 
-export default function ScheduleGrid({ friends }: ScheduleGridProps) {
+interface ScheduleGridProps {
+  friends: Friend[];
+  selectedSlot?: SlotSelection | null;
+  onSlotClick?: (slot: SlotSelection) => void;
+}
+
+export default function ScheduleGrid({ friends, selectedSlot, onSlotClick }: ScheduleGridProps) {
   const getBlocksForSlot = (day: number, hour: number) => {
     return friends.filter((f) =>
       f.schedule.some((s) => s.day === day && hour >= s.startHour && hour < s.endHour)
@@ -20,6 +28,8 @@ export default function ScheduleGrid({ friends }: ScheduleGridProps) {
     );
   };
 
+  const weekStart = startOfWeek(new Date());
+
   return (
     <div className="overflow-x-auto -mx-4 px-4">
       <div className="min-w-[600px]">
@@ -27,7 +37,7 @@ export default function ScheduleGrid({ friends }: ScheduleGridProps) {
         <div className="grid grid-cols-8 gap-1 mb-1">
           <div className="text-xs text-muted-foreground font-medium p-2" />
           {Array.from({ length: 7 }, (_, i) => {
-            const date = addDays(startOfWeek(new Date()), i);
+            const date = addDays(weekStart, i);
             return (
               <div key={i} className="text-xs font-semibold text-center p-2 text-foreground">
                 <div>{format(date, "EEE")}</div>
@@ -46,20 +56,26 @@ export default function ScheduleGrid({ friends }: ScheduleGridProps) {
             {Array.from({ length: 7 }, (_, day) => {
               const busy = getBlocksForSlot(day, hour);
               const free = isFree(day, hour) && friends.length > 0;
+              const date = addDays(weekStart, day);
+              const isSelected = selectedSlot?.day === day && selectedSlot?.hour === hour;
 
               return (
-                <div
+                <button
                   key={day}
-                  className={`h-8 rounded-lg text-[10px] font-medium flex items-center justify-center transition-colors ${
-                    free
-                      ? "bg-mint-light text-mint border border-mint/20"
+                  type="button"
+                  onClick={() => onSlotClick?.({ day, hour, date })}
+                  className={`h-8 rounded-lg text-[10px] font-medium flex items-center justify-center transition-all ${
+                    isSelected
+                      ? "bg-primary text-primary-foreground ring-2 ring-primary ring-offset-1"
+                      : free
+                      ? "bg-mint-light text-mint border border-mint/20 hover:ring-2 hover:ring-mint/40 cursor-pointer"
                       : busy.length > 0
-                      ? "bg-coral-light text-coral/70 border border-coral/10"
-                      : "bg-muted/50"
+                      ? "bg-coral-light text-coral/70 border border-coral/10 hover:ring-2 hover:ring-coral/30 cursor-pointer"
+                      : "bg-muted/50 cursor-default"
                   }`}
                 >
-                  {free ? "Free" : busy.length > 0 ? `${busy.length}` : ""}
-                </div>
+                  {isSelected ? "✓" : free ? "Free" : busy.length > 0 ? `${busy.length}` : ""}
+                </button>
               );
             })}
           </div>

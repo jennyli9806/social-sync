@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { friends as allFriends } from "@/lib/mockData";
 import FriendCard from "@/components/FriendCard";
-import ScheduleGrid from "@/components/ScheduleGrid";
+import ScheduleGrid, { SlotSelection } from "@/components/ScheduleGrid";
+import { format } from "date-fns";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
@@ -19,6 +20,13 @@ export default function CreateEvent() {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [location, setLocation] = useState("");
+  const [selectedSlot, setSelectedSlot] = useState<SlotSelection | null>(null);
+
+  const handleSlotClick = (slot: SlotSelection) => {
+    setSelectedSlot(slot);
+    setDate(format(slot.date, "yyyy-MM-dd"));
+    setTime(`${String(slot.hour).padStart(2, "0")}:00`);
+  };
 
   const selectedFriends = allFriends.filter((f) => selectedIds.includes(f.id));
 
@@ -83,7 +91,7 @@ export default function CreateEvent() {
             <p className="text-sm text-muted-foreground mb-4">
               Green slots = everyone is free!
             </p>
-            <ScheduleGrid friends={selectedFriends} />
+            <ScheduleGrid friends={selectedFriends} selectedSlot={selectedSlot} onSlotClick={handleSlotClick} />
             <div className="mt-6 flex justify-between">
               <Button variant="outline" onClick={() => setStep("friends")} className="rounded-full px-6 font-semibold">
                 <ArrowLeft className="w-4 h-4 mr-2" /> Back
