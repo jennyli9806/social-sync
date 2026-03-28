@@ -29,7 +29,8 @@ export default function EventCard({ event }: { event: SocialEvent }) {
       <div className="flex items-start justify-between mb-3">
         <div>
           <h3 className="font-display font-semibold text-lg text-foreground">{event.title}</h3>
-          <div className="flex items-center gap-3 mt-1 text-sm text-muted-foreground">
+          <div className="flex items-center gap-3 mt-1 text-sm text-muted-foreground flex-wrap">
+            <span className="flex items-center gap-1"><CalendarDays className="w-3.5 h-3.5" />{format(parseISO(event.date), "EEE, MMM d")}</span>
             <span className="flex items-center gap-1"><Clock className="w-3.5 h-3.5" />{event.time}</span>
             <span className="flex items-center gap-1"><MapPin className="w-3.5 h-3.5" />{event.location}</span>
           </div>
