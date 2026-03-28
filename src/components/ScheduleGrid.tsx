@@ -54,20 +54,26 @@ export default function ScheduleGrid({ friends, selectedSlot, onSlotClick }: Sch
             {Array.from({ length: 7 }, (_, day) => {
               const busy = getBlocksForSlot(day, hour);
               const free = isFree(day, hour) && friends.length > 0;
+              const date = addDays(weekStart, day);
+              const isSelected = selectedSlot?.day === day && selectedSlot?.hour === hour;
 
               return (
-                <div
+                <button
                   key={day}
-                  className={`h-8 rounded-lg text-[10px] font-medium flex items-center justify-center transition-colors ${
-                    free
-                      ? "bg-mint-light text-mint border border-mint/20"
+                  type="button"
+                  onClick={() => onSlotClick?.({ day, hour, date })}
+                  className={`h-8 rounded-lg text-[10px] font-medium flex items-center justify-center transition-all ${
+                    isSelected
+                      ? "bg-primary text-primary-foreground ring-2 ring-primary ring-offset-1"
+                      : free
+                      ? "bg-mint-light text-mint border border-mint/20 hover:ring-2 hover:ring-mint/40 cursor-pointer"
                       : busy.length > 0
-                      ? "bg-coral-light text-coral/70 border border-coral/10"
-                      : "bg-muted/50"
+                      ? "bg-coral-light text-coral/70 border border-coral/10 hover:ring-2 hover:ring-coral/30 cursor-pointer"
+                      : "bg-muted/50 cursor-default"
                   }`}
                 >
-                  {free ? "Free" : busy.length > 0 ? `${busy.length}` : ""}
-                </div>
+                  {isSelected ? "✓" : free ? "Free" : busy.length > 0 ? `${busy.length}` : ""}
+                </button>
               );
             })}
           </div>
