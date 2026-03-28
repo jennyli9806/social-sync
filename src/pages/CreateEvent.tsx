@@ -83,7 +83,7 @@ export default function CreateEvent() {
             <p className="text-sm text-muted-foreground mb-4">
               Green slots = everyone is free!
             </p>
-            <ScheduleGrid friends={selectedFriends} />
+            <ScheduleGrid friends={selectedFriends} selectedSlot={selectedSlot} onSlotClick={handleSlotClick} />
             <div className="mt-6 flex justify-between">
               <Button variant="outline" onClick={() => setStep("friends")} className="rounded-full px-6 font-semibold">
                 <ArrowLeft className="w-4 h-4 mr-2" /> Back
