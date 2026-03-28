@@ -1,3 +1,3 @@
-# Welcome to your Lovable project
+# HangTime
 
-TODO: Document your project here
+Project description
