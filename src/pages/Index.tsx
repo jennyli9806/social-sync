@@ -43,7 +43,10 @@ export default function Index() {
 
       {/* Upcoming Events */}
       <div>
-        <h3 className="font-display font-semibold text-lg text-foreground mb-4">Upcoming Events</h3>
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="font-display font-semibold text-lg text-foreground">Upcoming Events</h3>
+          <span className="text-sm text-muted-foreground">{format(new Date(), "EEEE, MMMM d")}</span>
+        </div>
         <div className="space-y-3">
           {upcoming.map((event, i) => (
             <motion.div key={event.id} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }}>
