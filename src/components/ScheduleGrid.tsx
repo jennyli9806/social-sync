@@ -1,4 +1,5 @@
-import { Friend, dayNames } from "@/lib/mockData";
+import { Friend } from "@/lib/mockData";
+import { format, addDays, startOfWeek } from "date-fns";
 
 const hours = Array.from({ length: 14 }, (_, i) => i + 7); // 7AM-8PM
 
