@@ -19,6 +19,13 @@ export default function CreateEvent() {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [location, setLocation] = useState("");
+  const [selectedSlot, setSelectedSlot] = useState<SlotSelection | null>(null);
+
+  const handleSlotClick = (slot: SlotSelection) => {
+    setSelectedSlot(slot);
+    setDate(format(slot.date, "yyyy-MM-dd"));
+    setTime(`${String(slot.hour).padStart(2, "0")}:00`);
+  };
 
   const selectedFriends = allFriends.filter((f) => selectedIds.includes(f.id));
 
