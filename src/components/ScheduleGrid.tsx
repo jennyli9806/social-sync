@@ -15,7 +15,7 @@ interface ScheduleGridProps {
   onSlotClick?: (slot: SlotSelection) => void;
 }
 
-export default function ScheduleGrid({ friends }: ScheduleGridProps) {
+export default function ScheduleGrid({ friends, selectedSlot, onSlotClick }: ScheduleGridProps) {
   const getBlocksForSlot = (day: number, hour: number) => {
     return friends.filter((f) =>
       f.schedule.some((s) => s.day === day && hour >= s.startHour && hour < s.endHour)
