@@ -28,6 +28,8 @@ export default function ScheduleGrid({ friends, selectedSlot, onSlotClick }: Sch
     );
   };
 
+  const weekStart = startOfWeek(new Date());
+
   return (
     <div className="overflow-x-auto -mx-4 px-4">
       <div className="min-w-[600px]">
@@ -35,7 +37,7 @@ export default function ScheduleGrid({ friends, selectedSlot, onSlotClick }: Sch
         <div className="grid grid-cols-8 gap-1 mb-1">
           <div className="text-xs text-muted-foreground font-medium p-2" />
           {Array.from({ length: 7 }, (_, i) => {
-            const date = addDays(startOfWeek(new Date()), i);
+            const date = addDays(weekStart, i);
             return (
               <div key={i} className="text-xs font-semibold text-center p-2 text-foreground">
                 <div>{format(date, "EEE")}</div>
