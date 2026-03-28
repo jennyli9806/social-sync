@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { CalendarDays, Users, Plus, Home } from "lucide-react";
+import { CalendarDays, Users, Plus, Home, Settings } from "lucide-react";
 import { motion } from "framer-motion";
 
 const navItems = [
@@ -8,6 +8,7 @@ const navItems = [
   { path: "/friends", icon: Users, label: "Friends" },
   { path: "/create", icon: Plus, label: "New Event" },
   { path: "/schedule", icon: CalendarDays, label: "Schedule" },
+  { path: "/settings", icon: Settings, label: "Connect" },
 ];
 
 export default function AppLayout({ children }: { children: ReactNode }) {

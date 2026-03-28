@@ -8,6 +8,9 @@ import Index from "./pages/Index";
 import Friends from "./pages/Friends";
 import Schedule from "./pages/Schedule";
 import CreateEvent from "./pages/CreateEvent";
+import Settings from "./pages/Settings";
+import ImportContacts from "./pages/ImportContacts";
+import CalendarConnect from "./pages/CalendarConnect";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,6 +27,9 @@ const App = () => (
             <Route path="/friends" element={<Friends />} />
             <Route path="/schedule" element={<Schedule />} />
             <Route path="/create" element={<CreateEvent />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/import-contacts" element={<ImportContacts />} />
+            <Route path="/calendars" element={<CalendarConnect />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AppLayout>
