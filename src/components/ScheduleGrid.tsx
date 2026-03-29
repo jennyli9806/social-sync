@@ -74,7 +74,7 @@ export default function ScheduleGrid({ friends, selectedSlot, onSlotClick }: Sch
                       : "bg-muted/50 cursor-default"
                   }`}
                 >
-                  {isSelected ? "✓" : free ? "Free" : busy.length > 0 ? `${busy.length}` : ""}
+                  {isSelected ? "✓" : free ? "Free" : busy.length > 0 ? `${busy.length} busy` : ""}
                 </button>
               );
             })}
