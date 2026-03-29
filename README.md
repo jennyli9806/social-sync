@@ -1,3 +1,3 @@
 # HangTime
 
-Project description
+Easily plan hangouts with your friends!
