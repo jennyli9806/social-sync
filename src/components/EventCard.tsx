@@ -71,7 +71,7 @@ export default function EventCard({ event, loading, error }: Props) {
             <span className="flex items-center gap-1"><MapPin className="w-3.5 h-3.5" />{event.location}</span>
           </div>
         </div>
-        <div className={`w-3 h-3 rounded-full mt-1 ${dotMap[event.color]}`} />
+        <div className={`w-4 h-4 rounded-full mt-1 ${dotMap[event.color]}`} />
       </div>
       <div className="flex items-center gap-1.5">
         {eventFriends.map((f) => (
