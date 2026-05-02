@@ -44,7 +44,11 @@ export default function FriendCard({ friend, selected, onToggle, onClick }: Frie
       </div>
       <div className="flex-1 min-w-0">
         <p className="font-medium text-foreground truncate">{friend.name}</p>
-        <p className="text-sm text-muted-foreground">{statusLabels[friend.status]}</p>
+        <p className={`text-xs font-medium px-2 py-0.5 rounded-full w-fit ${
+          friend.status === 'available' ? 'bg-mint/20 text-mint-foreground' :
+          friend.status === 'busy' ? 'bg-destructive/10 text-destructive' :
+          'bg-amber/20 text-amber-foreground'
+        }`}>{statusLabels[friend.status]}</p>
       </div>
       {onToggle && (
         <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-colors ${
