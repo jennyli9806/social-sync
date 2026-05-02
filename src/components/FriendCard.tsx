@@ -37,7 +37,7 @@ export default function FriendCard({ friend, selected, onToggle, onClick }: Frie
       }`}
     >
       <div className="relative">
-        <div className="w-12 h-12 rounded-full bg-secondary flex items-center justify-center font-display font-semibold text-secondary-foreground">
+        <div className="w-12 h-12 rounded-xl bg-secondary flex items-center justify-center font-display font-semibold text-secondary-foreground">
           {friend.avatar}
         </div>
         <div className={`absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full border-2 border-background ${statusColors[friend.status]}`} />

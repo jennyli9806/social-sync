@@ -1,5 +1,5 @@
 import { SocialEvent, friends as allFriends } from "@/lib/mockData";
-import { MapPin, Clock, CalendarDays } from "lucide-react";
+import { MapPin, Clock, CalendarDays, AlertCircle } from "lucide-react";
 import { motion } from "framer-motion";
 import { format, parseISO } from "date-fns";
 
@@ -17,7 +17,43 @@ const dotMap = {
   mint: "bg-mint",
 };
 
-export default function EventCard({ event }: { event: SocialEvent }) {
+type Props = { event?: SocialEvent; loading?: boolean; error?: string };
+
+export default function EventCard({ event, loading, error }: Props) {
+  if (loading) {
+    return (
+      <div className="rounded-2xl border p-5 bg-muted/30 border-muted animate-pulse">
+        <div className="flex items-start justify-between mb-3">
+          <div className="flex-1">
+            <div className="h-5 bg-muted rounded w-2/3 mb-2" />
+            <div className="flex gap-3 mt-1">
+              <div className="h-4 bg-muted rounded w-20" />
+              <div className="h-4 bg-muted rounded w-16" />
+              <div className="h-4 bg-muted rounded w-24" />
+            </div>
+          </div>
+          <div className="w-3 h-3 rounded-full bg-muted mt-1" />
+        </div>
+        <div className="flex items-center gap-1.5">
+          <div className="w-8 h-8 rounded-full bg-muted" />
+          <div className="w-8 h-8 rounded-full bg-muted" />
+          <div className="h-3 bg-muted rounded w-14 ml-1" />
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="rounded-2xl border p-5 bg-destructive/10 border-destructive/20 flex items-center gap-3 text-destructive">
+        <AlertCircle className="w-5 h-5 shrink-0" />
+        <p className="text-sm font-medium">{error}</p>
+      </div>
+    );
+  }
+
+  if (!event) return null;
+
   const eventFriends = event.friends.map((id) => allFriends.find((f) => f.id === id)!).filter(Boolean);
 
   return (
