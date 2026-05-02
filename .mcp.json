@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "social-sync-storybook": {
+      "type": "http",
+      "url": "http://localhost:6007/mcp"
+    }
+  }
+}

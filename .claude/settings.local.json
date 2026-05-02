@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__social-sync-storybook__list-all-documentation",
+      "mcp__social-sync-storybook__get-storybook-story-instructions",
+      "mcp__social-sync-storybook__get-documentation",
+      "mcp__social-sync-storybook__get-documentation-for-story"
+    ]
+  }
+}
